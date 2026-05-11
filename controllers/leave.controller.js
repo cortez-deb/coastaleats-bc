@@ -1,5 +1,5 @@
 import * as leaveService from '../services/leave.service.js';
-import { LeaveRequest, User } from '../models/index.js';
+import { LeaveRequest, User, Availability } from '../models/index.js';
 import { Op } from 'sequelize';
 
 export async function createLeaveRequest(req, res, next) {
