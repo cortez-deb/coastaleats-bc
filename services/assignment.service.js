@@ -135,13 +135,23 @@ export async function checkConstraints(userId, shiftId, overrideReason = null) {
   }
   
   if (!isAvailable) {
-    result.allowed = false;
-    result.violations.push({
-      level: 'HARD',
-      code: 'UNAVAILABLE',
-      message: reason || `${user.name} is not available during this shift time.`,
-      suggestions: await getSuggestions()
-    });
+    if (overrideReason) {
+      result.warnings.push({
+        level: 'WARN',
+        code: 'UNAVAILABLE_OVERRIDE',
+        message: `${reason || 'Unavailable'} — approved with override: '${overrideReason}'.`
+      });
+    } else {
+      result.allowed = false;
+      result.requiresOverride = true;
+      if (!result.overrideTarget) result.overrideTarget = "UNAVAILABLE";
+      result.violations.push({
+        level: 'HARD',
+        code: 'UNAVAILABLE',
+        message: reason || `${user.name} is not available during this shift time.`,
+        suggestions: await getSuggestions()
+      });
+    }
   }
 
   // Active assignments for checking 4, 5, 6, 7, 8

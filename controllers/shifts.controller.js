@@ -330,7 +330,7 @@ export async function getEligibleStaff(req, res, next) {
     for (const user of users) {
       const result = await checkConstraints(user.id, shiftId);
       
-      const hasNonOverridableHardBlocks = result.violations.some(v => v.code !== 'DAILY_HOURS_BLOCK' && v.code !== 'CONSECUTIVE_DAY_BLOCK');
+      const hasNonOverridableHardBlocks = result.violations.some(v => v.code !== 'DAILY_HOURS_BLOCK' && v.code !== 'CONSECUTIVE_DAY_BLOCK' && v.code !== 'UNAVAILABLE');
       
       if (!hasNonOverridableHardBlocks) {
         eligible.push({ 
