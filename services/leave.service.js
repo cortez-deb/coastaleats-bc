@@ -1,4 +1,4 @@
-import { LeaveRequest, User, Availability, AvailabilityException, Shift, ShiftAssignment, AuditLog, sequelize, Location, Notification } from '../models/index.js';
+import { LeaveRequest, User, Availability, AvailabilityException, Shift, ShiftAssignment, AuditLog, sequelize, Location, Notification, Skill, ManagerLocation } from '../models/index.js';
 import { Op } from 'sequelize';
 import { DateTime } from 'luxon';
 
